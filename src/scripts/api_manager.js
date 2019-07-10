@@ -1,9 +1,12 @@
 const API = {
-    getAPI: function(database) {
-      return fetch(`http://localhost:8088/${database}`).then(
-        response => response.json()
-      );
-    },
+    getAPI: function(database, queryParams) {
+        let url = `http://localhost:8088/${database}`
+        if (queryParams) {
+          url += `?${queryParams}`
+        }
+        return fetch(url)
+        .then( data => data.json() )
+      },
     postAPI: function(database, entry) {
       return fetch(`http://localhost:8088/${database}`, {
         method: "POST",
@@ -31,3 +34,5 @@ const API = {
       });
     }
   };
+
+  export { API }
