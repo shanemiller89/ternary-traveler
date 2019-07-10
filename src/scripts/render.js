@@ -10,7 +10,12 @@ const RENDER = {
                 mainContainer.appendChild(COMPONENT.poiDisplayComponent(poi))
             });
         });
+    },
+    displayFormPOI: function () {
+        API.getAPI("places").then( places => {
+            mainContainer.appendChild(COMPONENT.poiFormComponent(places))
+        });
     }
 };
 
-export {RENDER}
+export {RENDER, mainContainer}
