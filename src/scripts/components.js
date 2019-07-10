@@ -1,6 +1,7 @@
 import { UTILITY } from "./utility.js"
 import { API } from "./api_manager.js";
-import {EVENT} from "./events.js"
+import {EVENT} from "./events.js";
+import {RENDER, mainContainer} from "./render.js"
 
 
 const COMPONENT = {
@@ -41,6 +42,9 @@ const COMPONENT = {
     },
     poiDisplayComponent: function (x) {
         let poiContainer = document.createElement("div")
+        let deletePoiBtn = document.createElement("button")
+        deletePoiBtn.setAttribute("id", `${x.id}`)
+        deletePoiBtn.textContent = "delete"
         let poiDisplay = `
         <h1> Points of Interest</h1>
         <h2>Location: </h2><div>${x.place.name}</div>
@@ -50,18 +54,27 @@ const COMPONENT = {
         <h2>Review: </h2><div>${x.review}</div>
         `
         poiContainer.innerHTML = poiDisplay;
+        poiContainer.appendChild(deletePoiBtn)
+        deletePoiBtn.addEventListener("click", () => {
+            let results = window.confirm("Are you sure you want to delete?");
+            let id = event.target.id
+            if (results === true) {
+                console.log("delete")
+                API.deleteAPI("interests", id ).then(() => {
+                    mainContainer.innerHTML = "";
+                    RENDER.displayFormPOI()
+                    RENDER.displayPOI()
+                })
+            } else {
+                console.log("You said no")
+            }
+        });
         return poiContainer;
+    },
+    editPoiForm: function () {
+        placeholder
     }
 };
 
-// poiSubmitBtn.addEventListener("click", ()=> {
-//     let placeId = document.querySelector("#places").value;
-//     let poiName = document.querySelector("#name").value;
-//     let poiDesc = document.querySelector("#description").value;
-//     let poiCost = document.querySelector("#cost").value;
-//     let newPOI = UTILITY.newPoiFactory(placeId, poiName, poiDesc, poiCost);
-//     API.postAPI("interests", newPOI)
-// })
-
-
 export {COMPONENT}
+
