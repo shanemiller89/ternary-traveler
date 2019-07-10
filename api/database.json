@@ -24,14 +24,6 @@
       "description": "Local market where you can purchase local products and try the local food",
       "cost": 0,
       "review": ""
-    },
-    {
-      "placeId": "2",
-      "name": "test",
-      "description": "test",
-      "cost": "24.50",
-      "review": "",
-      "id": 2
     }
   ]
 }
