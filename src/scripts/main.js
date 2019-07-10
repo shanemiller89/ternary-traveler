@@ -2,4 +2,5 @@ console.log("Your Webpack application is set up and ready to go. Please start wr
 
 import {RENDER} from "./render.js"
 
+RENDER.displayFormPOI()
 RENDER.displayPOI()
